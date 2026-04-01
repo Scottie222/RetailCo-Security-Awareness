@@ -116,9 +116,7 @@ The dashboard will be available at http://localhost:8501.
 
 | Username | Password | Role |
 |---|---|---|
-| admin | admin123 | Admin — full access including simulation controls |
-| alice | analyst123 | Analyst — read access to all dashboards |
-| bob | viewer123 | Analyst — read access to all dashboards |
+| admin | alice/password123 | Admin — full access including simulation controls |
 
 Passwords are stored as bcrypt hashes in `data/users.csv`. To add or change users, edit `generate_users.py` and re-run it.
 
