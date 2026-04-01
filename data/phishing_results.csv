@@ -1,101 +1,71 @@
-Employee_ID,Department,Email_Clicked,Credentials_Submitted,Reported_Phish,Attack_Type
-1,HR,No,Yes,No,Ransomware
-2,HR,Yes,No,Yes,Ransomware
-3,Finance,Yes,No,Yes,Ransomware
-4,Logistics,Yes,Yes,Yes,Ransomware
-5,Logistics,Yes,No,Yes,Ransomware
-6,Finance,No,No,No,Ransomware
-7,Sales,Yes,Yes,Yes,Ransomware
-8,Finance,No,Yes,Yes,Ransomware
-9,HR,No,No,No,Ransomware
-10,HR,No,Yes,Yes,Ransomware
-11,HR,No,Yes,No,Ransomware
-12,IT,No,No,Yes,Ransomware
-13,Logistics,No,No,No,Ransomware
-14,HR,Yes,No,No,Ransomware
-15,IT,Yes,No,No,Ransomware
-16,Logistics,Yes,Yes,No,Ransomware
-17,Logistics,No,No,No,Ransomware
-18,IT,Yes,No,No,Ransomware
-19,IT,Yes,Yes,No,Ransomware
-20,Finance,Yes,Yes,Yes,Ransomware
-21,Finance,No,No,Yes,Ransomware
-22,Logistics,Yes,Yes,Yes,Ransomware
-23,Logistics,Yes,No,Yes,Ransomware
-24,Sales,Yes,No,No,Ransomware
-25,Logistics,No,No,Yes,Ransomware
-26,Sales,Yes,No,Yes,Ransomware
-27,Logistics,Yes,No,Yes,Ransomware
-28,IT,No,No,Yes,Ransomware
-29,Finance,Yes,No,Yes,Ransomware
-30,IT,No,Yes,No,Ransomware
-31,Logistics,No,Yes,Yes,Ransomware
-32,Finance,No,No,No,Ransomware
-33,Logistics,No,No,Yes,Ransomware
-34,Finance,Yes,Yes,No,Ransomware
-35,Logistics,No,Yes,Yes,Ransomware
-36,Sales,No,No,Yes,Ransomware
-37,IT,Yes,No,Yes,Ransomware
-38,IT,Yes,No,Yes,Ransomware
-39,HR,Yes,No,Yes,Ransomware
-40,Logistics,Yes,Yes,Yes,Ransomware
-41,Logistics,No,Yes,No,Ransomware
-42,Sales,Yes,Yes,No,Ransomware
-43,HR,No,No,Yes,Ransomware
-44,Finance,No,No,No,Ransomware
-45,Finance,Yes,Yes,Yes,Ransomware
-46,IT,No,Yes,Yes,Ransomware
-47,HR,No,Yes,No,Ransomware
-48,Finance,No,No,Yes,Ransomware
-49,IT,No,No,No,Ransomware
-50,Logistics,Yes,No,No,Ransomware
-51,Logistics,Yes,Yes,Yes,Ransomware
-52,Finance,Yes,Yes,No,Ransomware
-53,IT,Yes,No,Yes,Ransomware
-54,IT,No,No,Yes,Ransomware
-55,IT,No,No,No,Ransomware
-56,Logistics,Yes,No,No,Ransomware
-57,IT,Yes,No,Yes,Ransomware
-58,HR,Yes,Yes,Yes,Ransomware
-59,IT,No,Yes,Yes,Ransomware
-60,Sales,No,No,No,Ransomware
-61,HR,Yes,Yes,Yes,Ransomware
-62,HR,No,Yes,Yes,Ransomware
-63,HR,Yes,No,Yes,Ransomware
-64,Sales,No,No,Yes,Ransomware
-65,Logistics,Yes,No,Yes,Ransomware
-66,Finance,No,Yes,Yes,Ransomware
-67,HR,Yes,Yes,Yes,Ransomware
-68,Logistics,Yes,No,Yes,Ransomware
-69,Logistics,No,Yes,No,Ransomware
-70,HR,No,No,No,Ransomware
-71,HR,Yes,Yes,Yes,Ransomware
-72,Finance,Yes,Yes,Yes,Ransomware
-73,IT,Yes,Yes,Yes,Ransomware
-74,Finance,No,Yes,No,Ransomware
-75,Finance,No,No,No,Ransomware
-76,Finance,No,Yes,Yes,Ransomware
-77,IT,Yes,No,No,Ransomware
-78,Sales,Yes,No,No,Ransomware
-79,IT,No,Yes,No,Ransomware
-80,Sales,No,Yes,No,Ransomware
-81,Finance,No,No,Yes,Ransomware
-82,IT,No,Yes,Yes,Ransomware
-83,IT,No,No,No,Ransomware
-84,IT,No,Yes,No,Ransomware
-85,HR,No,Yes,Yes,Ransomware
-86,HR,Yes,Yes,Yes,Ransomware
-87,HR,Yes,No,No,Ransomware
-88,Sales,No,Yes,No,Ransomware
-89,IT,Yes,No,No,Ransomware
-90,Finance,Yes,Yes,No,Ransomware
-91,Finance,Yes,Yes,Yes,Ransomware
-92,IT,No,No,Yes,Ransomware
-93,IT,No,No,Yes,Ransomware
-94,Finance,No,Yes,No,Ransomware
-95,Sales,No,No,Yes,Ransomware
-96,IT,No,Yes,No,Ransomware
-97,Sales,No,No,Yes,Ransomware
-98,HR,No,No,No,Ransomware
-99,Finance,Yes,Yes,Yes,Ransomware
-100,IT,Yes,Yes,No,Ransomware
+email,is_phishing,department,date,employee,clicked,reported,template
+phish1@evil.com,1,Logistics,2024-10-01,John Mokoena,1,0,
+phish2@evil.com,1,Finance,2024-10-02,Sarah Dlamini,1,0,
+safe1@retailco.com,0,HR,2024-10-02,Thabo Nkosi,0,1,
+phish3@evil.com,1,IT,2024-10-03,Lerato Sithole,0,1,
+phish4@evil.com,1,Logistics,2024-10-04,Mpho Zulu,1,0,
+safe2@retailco.com,0,Finance,2024-10-05,Nomsa Khumalo,0,0,
+phish5@evil.com,1,Finance,2024-10-06,David Pietersen,1,0,
+phish6@evil.com,1,HR,2024-10-07,Ayanda Molefe,1,0,
+safe3@retailco.com,0,IT,2024-10-08,Sipho Ndlovu,0,1,
+phish7@evil.com,1,Logistics,2024-10-09,Zanele Mahlangu,1,0,
+phish8@evil.com,1,Logistics,2024-10-10,Bongani Cele,1,0,
+safe4@retailco.com,0,HR,2024-10-11,Priya Naidoo,0,1,
+phish9@evil.com,1,Finance,2024-10-12,Tebogo Molete,1,0,
+safe5@retailco.com,0,IT,2024-10-13,Heinrich Botha,0,0,
+phish10@evil.com,1,Logistics,2024-10-14,Ntombifuthi Dube,1,0,
+phish11@evil.com,1,Finance,2024-10-15,Kagiso Sithole,1,0,
+safe6@retailco.com,0,HR,2024-10-16,Lindiwe Mthembu,0,1,
+phish12@evil.com,1,IT,2024-10-17,Sifiso Nxumalo,1,0,
+safe7@retailco.com,0,Logistics,2024-10-18,Rudo Moyo,0,1,
+phish13@evil.com,1,Finance,2024-10-19,Carlos Ferreira,1,0,
+phish14@evil.com,1,HR,2024-10-20,Nandi Dlamini,0,1,
+safe8@retailco.com,0,IT,2024-10-21,Wayne Jacobs,0,0,
+phish15@evil.com,1,Logistics,2024-10-22,Precious Khumalo,1,0,
+safe9@retailco.com,0,Finance,2024-10-23,Lungelo Mthethwa,0,1,
+phish16@evil.com,1,HR,2024-10-24,Thandi Zungu,1,0,
+safe10@retailco.com,0,IT,2024-10-25,Andre du Toit,0,0,
+phish17@evil.com,1,Logistics,2024-10-26,Nomvula Shabalala,1,0,
+phish18@evil.com,1,Finance,2024-10-27,Sibusiso Mhlongo,1,0,
+safe11@retailco.com,0,HR,2024-10-28,Fatima Mahomed,0,1,
+phish19@evil.com,1,IT,2024-10-29,Vusi Masondo,0,1,
+phish20@evil.com,1,Logistics,2024-10-30,Nokukhanya Buthelezi,1,0,
+safe12@retailco.com,0,Finance,2024-11-01,Thandeka Mfeka,0,0,
+phish21@evil.com,1,Finance,2024-11-03,Lungisa Dlamini,1,0,
+safe13@retailco.com,0,IT,2024-11-05,Pieter van Wyk,0,1,
+phish22@evil.com,1,HR,2024-11-07,Nokwanda Gumede,1,0,
+phish23@evil.com,1,Logistics,2024-11-09,Mlungisi Zuma,1,0,
+safe14@retailco.com,0,Finance,2024-11-11,Siyanda Nxumalo,0,0,
+phish24@evil.com,1,IT,2024-11-13,Nompumelelo Cele,1,0,
+safe15@retailco.com,0,HR,2024-11-15,Jabulani Khumalo,0,1,
+phish25@evil.com,1,Logistics,2024-11-17,Thokozile Ntuli,1,0,
+phish_4235@sim.retailco.com,1,IT,2026-03-31,Heinrich Botha,1,0,Your account has been suspended. Verify your identity immediately to restore access.
+phish_8803@sim.retailco.com,1,IT,2026-03-31,Andre du Toit,1,0,Your account has been suspended. Verify your identity immediately to restore access.
+phish_6517@sim.retailco.com,1,IT,2026-03-31,Sifiso Nxumalo,0,0,URGENT: Unusual login detected. Confirm your password now or your account will be locked.
+phish_6881@sim.retailco.com,1,IT,2026-03-31,Sipho Ndlovu,1,0,"SARS Tax Refund: You are eligible for a R4,500 refund. Click here to submit your details."
+phish_3006@sim.retailco.com,1,IT,2026-03-31,Wayne Jacobs,1,0,"Congratulations! You have been selected as our lucky winner. Claim your R10,000 prize now."
+phish_3724@sim.retailco.com,1,IT,2026-03-31,Lerato Sithole,0,0,Your package could not be delivered. Pay R45 customs fee to release your shipment.
+phish_7327@sim.retailco.com,1,IT,2026-03-31,Andre du Toit,1,0,IT Security Alert: Your Microsoft license has expired. Renew immediately to avoid disruption.
+phish_9284@sim.retailco.com,1,IT,2026-03-31,Wayne Jacobs,1,0,"SARS Tax Refund: You are eligible for a R4,500 refund. Click here to submit your details."
+phish_6033@sim.retailco.com,1,IT,2026-03-31,Lerato Sithole,1,0,Your package could not be delivered. Pay R45 customs fee to release your shipment.
+phish_6153@sim.retailco.com,1,IT,2026-03-31,Heinrich Botha,1,0,Your account has been suspended. Verify your identity immediately to restore access.
+phish_2209@sim.retailco.com,1,IT,2026-03-31,Heinrich Botha,0,0,URGENT: Unusual login detected. Confirm your password now or your account will be locked.
+phish_6342@sim.retailco.com,1,IT,2026-03-31,Andre du Toit,0,1,"Congratulations! You have been selected as our lucky winner. Claim your R10,000 prize now."
+phish_2373@sim.retailco.com,1,IT,2026-03-31,Wayne Jacobs,1,0,Action Required: Your email storage is full. Click here to upgrade your account.
+phish_9517@sim.retailco.com,1,IT,2026-03-31,Andre du Toit,1,0,URGENT: Unusual login detected. Confirm your password now or your account will be locked.
+phish_3786@sim.retailco.com,1,IT,2026-03-31,Sifiso Nxumalo,0,0,HR Notice: Please review and sign the attached employment contract immediately.
+phish_4338@sim.retailco.com,1,IT,2026-03-31,Vusi Masondo,1,0,"Congratulations! You have been selected as our lucky winner. Claim your R10,000 prize now."
+phish_2404@sim.retailco.com,1,IT,2026-03-31,Lerato Sithole,1,0,Action Required: Your email storage is full. Click here to upgrade your account.
+phish_4262@sim.retailco.com,1,IT,2026-03-31,Sifiso Nxumalo,1,0,"Congratulations! You have been selected as our lucky winner. Claim your R10,000 prize now."
+phish_7950@sim.retailco.com,1,IT,2026-03-31,Vusi Masondo,1,0,Your salary payment has been delayed. Please verify your banking details with HR.
+phish_8465@sim.retailco.com,1,IT,2026-03-31,Heinrich Botha,1,0,Your salary payment has been delayed. Please verify your banking details with HR.
+phish_6625@sim.retailco.com,1,IT,2026-03-31,Lerato Sithole,1,0,Your account has been suspended. Verify your identity immediately to restore access.
+phish_4178@sim.retailco.com,1,IT,2026-03-31,Lerato Sithole,1,0,Your PayPal account has been limited. Verify your details to restore full access.
+phish_1399@sim.retailco.com,1,IT,2026-03-31,Andre du Toit,0,1,Action Required: Your email storage is full. Click here to upgrade your account.
+phish_8330@sim.retailco.com,1,IT,2026-03-31,Vusi Masondo,1,0,URGENT: Unusual login detected. Confirm your password now or your account will be locked.
+phish_3638@sim.retailco.com,1,IT,2026-03-31,Heinrich Botha,0,0,"Congratulations! You have been selected as our lucky winner. Claim your R10,000 prize now."
+phish_6127@sim.retailco.com,1,IT,2026-03-31,Wayne Jacobs,1,0,Action Required: Your email storage is full. Click here to upgrade your account.
+phish_8585@sim.retailco.com,1,IT,2026-03-31,Sifiso Nxumalo,1,0,"Congratulations! You have been selected as our lucky winner. Claim your R10,000 prize now."
+phish_7524@sim.retailco.com,1,IT,2026-03-31,Wayne Jacobs,1,0,URGENT: Unusual login detected. Confirm your password now or your account will be locked.
+phish_5416@sim.retailco.com,1,IT,2026-03-31,Vusi Masondo,1,0,Your salary payment has been delayed. Please verify your banking details with HR.
+phish_5173@sim.retailco.com,1,IT,2026-03-31,Sipho Ndlovu,1,0,Your salary payment has been delayed. Please verify your banking details with HR.

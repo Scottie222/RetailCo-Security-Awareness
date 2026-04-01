@@ -1,0 +1,31 @@
+"""
+Run this ONCE from the repo root to generate users.csv with real bcrypt hashes.
+
+    python generate_users.py
+
+The original users.csv had placeholder hashes like "$2b$12$abc123..."
+which are not valid and will crash bcrypt.checkpw at login.
+"""
+
+import bcrypt
+import csv
+from pathlib import Path
+
+USERS = [
+    {"username": "admin",  "password": "admin123",    "role": "admin"},
+    {"username": "alice",  "password": "analyst123",  "role": "analyst"},
+    {"username": "bob",    "password": "viewer123",   "role": "analyst"},
+]
+
+OUT = Path(__file__).resolve().parent / "data" / "users.csv"
+OUT.parent.mkdir(exist_ok=True)
+
+with open(OUT, "w", newline="") as f:
+    writer = csv.DictWriter(f, fieldnames=["username", "password", "role"])
+    writer.writeheader()
+    for u in USERS:
+        hashed = bcrypt.hashpw(u["password"].encode(), bcrypt.gensalt(12)).decode()
+        writer.writerow({"username": u["username"], "password": hashed, "role": u["role"]})
+        print(f"✅  {u['username']} — hash written")
+
+print(f"\nDone! users.csv saved to {OUT}")
