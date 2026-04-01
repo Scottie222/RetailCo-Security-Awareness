@@ -585,17 +585,30 @@ def dashboard():
                                   placeholder="e.g. Your account has been suspended. Click here to verify immediately...")
         if st.button("⚡ ANALYZE EMAIL", use_container_width=False):
             if email_text.strip():
-                detail = predict_email_detail(email_text)
-                if detail["prediction"] == 1:
+                # Support both old ai_detector (predict_email only) and new (predict_email_detail)
+                try:
+                    detail = predict_email_detail(email_text)
+                    prediction = detail.get("prediction", predict_email(email_text))
+                    confidence = detail.get("confidence", None)
+                    triggers   = detail.get("triggers", [])
+                except Exception:
+                    prediction = int(predict_email(email_text))
+                    confidence = None
+                    triggers   = []
+
+                conf_html = f"&nbsp;<span style='font-size:0.75rem;color:#aa2040;'>CONFIDENCE: {confidence}%</span>" if confidence else ""
+                conf_safe = f"&nbsp;<span style='font-size:0.75rem;color:#2a6040;'>CONFIDENCE: {confidence}%</span>" if confidence else ""
+
+                if prediction == 1:
                     triggers_html = ""
-                    if detail["triggers"]:
-                        kws = ", ".join(f'<code style="color:#ffb400;background:rgba(255,180,0,0.1);padding:1px 5px;border-radius:2px;">{t}</code>' for t in detail["triggers"])
+                    if triggers:
+                        kws = ", ".join(f'<code style="color:#ffb400;background:rgba(255,180,0,0.1);padding:1px 5px;border-radius:2px;">{t}</code>' for t in triggers)
                         triggers_html = f"<div style='margin-top:0.6rem;font-size:0.72rem;color:#7a6030;'>Trigger keywords: {kws}</div>"
                     st.markdown(f"""
                     <div style='background:rgba(255,56,96,0.1);border:1px solid rgba(255,56,96,0.4);
                                 border-left:4px solid #ff3860;padding:1rem;border-radius:3px;
                                 font-family:"Share Tech Mono",monospace;color:#ff3860;font-size:0.9rem;'>
-                        ⚠ THREAT DETECTED &nbsp;<span style='font-size:0.75rem;color:#aa2040;'>CONFIDENCE: {detail["confidence"]}%</span><br>
+                        THREAT DETECTED{conf_html}<br>
                         <span style='font-size:0.75rem;color:#7a3040;display:block;margin-top:0.4rem;'>
                         Do not click any links. Report to IT Security immediately.</span>
                         {triggers_html}
@@ -605,7 +618,7 @@ def dashboard():
                     <div style='background:rgba(0,230,118,0.08);border:1px solid rgba(0,230,118,0.3);
                                 border-left:4px solid #00e676;padding:1rem;border-radius:3px;
                                 font-family:"Share Tech Mono",monospace;color:#00e676;font-size:0.9rem;'>
-                        ✓ EMAIL APPEARS SAFE &nbsp;<span style='font-size:0.75rem;color:#2a6040;'>CONFIDENCE: {detail["confidence"]}%</span><br>
+                        EMAIL APPEARS SAFE{conf_safe}<br>
                         <span style='font-size:0.75rem;color:#2a6040;display:block;margin-top:0.4rem;'>
                         Remain vigilant. Always verify sender identity for sensitive requests.</span>
                     </div>""", unsafe_allow_html=True)
