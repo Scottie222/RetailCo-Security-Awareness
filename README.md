@@ -47,7 +47,7 @@ To view the live dashboard run the app locally (instructions below). Login with:
 
 | Role | Username | Password |
 |---|---|---|
-| Admin | admin | admin123 |
+| Admin | admin | alice/password123|
 | Analyst | alice | analyst123 |
 
 ---
