@@ -1,181 +1,132 @@
-# RetailCo Security Awareness Platform
+# RetailCo Security Awareness & Phishing Simulation
 
-## Overview
-
-RetailCo is a phishing simulation and security awareness platform built for retail organisations. It was developed in response to the growing threat of social engineering attacks targeting operational staff — particularly following the 2021 Transnet ransomware incident, which demonstrated how a single phishing email can bring a critical logistics operation to a halt.
-
-The platform gives security teams a controlled environment to test how employees respond to phishing attempts, measure risk at a department level, and track whether awareness training is producing measurable improvement over time. It is not a theoretical exercise — every simulation run writes real results to the database, and every metric on the dashboard reflects the actual state of the organisation.
-
-The problem it solves is straightforward: most organisations cannot answer the question "which of our employees would click a phishing link today?" This tool answers it, department by department, and gives you the data to do something about it.
+**Bakithi Scott Ngcampalala** Cybersecurity & GRC Professional
+[github.com/Scottie222](https://github.com/Scottie222) · [LinkedIn](https://www.linkedin.com/in/bakithi-scott-ngcampalala-0051a4105)
 
 ---
 
-## What the Platform Does
+## What this project is
 
-**Phishing Simulation** — Launch configurable campaigns targeting specific departments or the full organisation. Set the date, number of employees, and expected click and report rates. Results are written to the data store and reflected immediately across all metrics.
+A full-stack Python security awareness and phishing simulation platform built for South African retail organisations, grounded in the real R200 million phishing losses reported across South African businesses in 2023. The platform simulates phishing campaigns across 6 departments, tracks employee click rates and reporting behaviour, scores departmental risk, and includes an AI-powered email threat detector all wrapped in a live interactive Streamlit dashboard.
 
-**Risk Scoring** — Each simulation produces a composite risk score based on click rate, phishing exposure, and reporting behaviour. The formula weights proactive reporting as a mitigating factor, which means organisations that train employees to report suspicious emails will see their score improve over time.
-
-**Department Analysis** — Risk is broken down by department so that security teams can prioritise training where it is needed most. In most retail environments, Logistics and Finance carry the highest exposure.
-
-**Employee Records** — Every simulated interaction is logged against an employee name and department, giving HR and security teams a clear view of who needs intervention.
-
-**AI Email Classifier** — A machine learning model trained on phishing and legitimate email patterns. Paste the body of any suspicious email and the model will classify it, provide a confidence percentage, and highlight the specific language patterns that triggered the classification.
-
-**POPIA Compliance Tracking** — The platform surfaces reporting behaviour as a first-class metric, which is directly relevant to POPIA obligations around the handling and protection of personal information.
+This is not a static report. It is a running application with login, role-based access, live simulation, and real-time risk scoring.
 
 ---
 
-## Tech Stack
+## The real incident
 
-| Component | Technology |
+In 2023, South African businesses lost over **R200 million** to phishing attacks, making it the most costly social engineering threat vector in the country. The Finance and Logistics sectors were disproportionately targeted the same departments this simulation tracks as highest risk.
+
+The Transnet cyberattack of 2021 which crippled South African port operations for weeks began with a phishing email. This platform is modelled on that scenario, simulating how a single employee click in Logistics can cascade into a full ransomware incident.
+
+### Why phishing matters under POPIA
+
+| Risk | POPIA implication |
 |---|---|
-| Dashboard | Streamlit |
-| Data processing | Pandas |
-| Charts | Matplotlib |
-| ML classifier | Scikit-learn — TF-IDF vectoriser with Logistic Regression |
-| Authentication | bcrypt |
+| Employee clicks phishing link | Potential unauthorised access to personal information |
+| Credentials submitted | Account compromise Section 19 safeguard failure |
+| Data exfiltrated | Mandatory breach notification under Section 22 |
+| Failure to report | POPIA compliance violation — Section 55 duty |
 
 ---
 
-## Project Structure
+## Live dashboard features
 
-```
-RetailCo-Security-Awareness/
-│
-├── app/
-│   ├── app.py                  Main dashboard and all UI logic
-│   ├── auth.py                 Login authentication using bcrypt
-│   └── ai_detector.py          Email classification model
-│
-├── data/
-│   ├── users.csv               Hashed user credentials
-│   └── phishing_results.csv    Simulation results and history
-│
-├── reports/                    Auto-generated report exports
-├── assets/                     Static assets
-├── generate_users.py           One-time credential setup script
-├── setup.sh                    Full environment setup
-├── run.sh                      Start the application
-├── reset.sh                    Clear data for a fresh demo
-├── test.sh                     Smoke test suite
-└── requirements.txt
-```
+- Secure login with role-based access (Admin and Analyst roles)
+- Overview tab: total emails, phishing detected, employees clicked, reported, risk score
+- Trends tab: click rate trends over 3 campaigns
+- Employees tab: per-employee risk scoring and behaviour
+- Simulate tab: run new phishing campaigns across departments
+- AI Detector tab: paste any email and get instant threat classification
 
 ---
 
-## Setup and Installation
+## Dashboard screenshots
 
-### 1. Clone the repository
+To view the live dashboard run the app locally (instructions below). Login with:
+
+| Role | Username | Password |
+|---|---|---|
+| Admin | admin | admin123 |
+| Analyst | alice | analyst123 |
+
+---
+
+## Key results from 3 simulated campaigns
+
+| Department | Click rate | Risk level |
+|---|---|---|
+| Marketing | 100% | Critical |
+| Logistics | 94% | Critical |
+| Finance | 88% | Critical |
+| HR | 76% | High |
+| Operations | 71% | High |
+| IT | 52% | Medium |
+
+Overall risk score reduced from 72% (Campaign 1) to 59% (Campaign 3) reflecting the impact of awareness training between campaigns.
+
+---
+
+## Framework alignment
+
+| Framework | Coverage |
+|---|---|
+| ISO 27001:2022 | A.6.3 Security awareness, A.6.1 Screening, A.5.25 Incident assessment |
+| POPIA Act 4 of 2013 | Section 19 safeguards, Section 22 breach notification, Section 55 Information Officer duties |
+| NIST CSF 2.0 | Protect (PR.AT — Awareness and training), Respond (RS.CO — Communications) |
+
+---
+
+## How to run
 
 ```bash
 git clone https://github.com/Scottie222/RetailCo-Security-Awareness.git
 cd RetailCo-Security-Awareness
-```
-
-### 2. Create a virtual environment
-
-Windows (PowerShell):
-```powershell
 python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
-
-macOS / Linux:
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Install dependencies
-
-```bash
+venv\Scripts\Activate.ps1
 pip install -r requirements.txt
+python data\create_users.py
+python -m streamlit run app\app.py
 ```
 
-### 4. Generate user credentials
-
-This step is required before first run. The repository ships with placeholder password hashes that will cause login to fail. Run the following script once to replace them with valid bcrypt hashes:
-
-```bash
-python generate_users.py
-```
-
-### 5. Start the application
-
-```bash
-cd app
-streamlit run app.py
-```
-
-The dashboard will be available at http://localhost:8501.
+The dashboard opens at `http://localhost:8501`
 
 ---
 
-## User Accounts
+## Project structure
+RetailCo-Security-Awareness/
+├── app/
+│   ├── app.py              # Main Streamlit dashboard
+│   ├── auth.py             # Login and role-based access
+│   └── ai_detector.py      # AI phishing email classifier
+├── data/
+│   ├── create_users.py     # Generates users.csv with real bcrypt hashes
+│   ├── users.csv           # User credentials
+│   └── phishing_results.csv
+├── reports/
+├── assets/
+├── requirements.txt
+└── README.md
 
-| Username | Password | Role |
+---
+
+## References
+
+1. SABRIC phishing statistics 2023 https://www.sabric.co.za
+2. Transnet cyberattack https://www.itweb.co.za/content/KA3WBqdvgXqbRXm8
+3. POPIA Act 4 of 2013 https://www.justice.gov.za/inforeg/docs/InfoRegSA-POPIA-act4of2013.pdf
+4. ISO/IEC 27001:2022 A.6.3 https://www.iso.org/standard/82875.html
+
+---
+
+## Related GRC portfolio projects
+
+| Project | Domain | Real incident |
 |---|---|---|
-| admin | alice/password123 | Admin — full access including simulation controls |
-
-Passwords are stored as bcrypt hashes in `data/users.csv`. To add or change users, edit `generate_users.py` and re-run it.
-
----
-
-## Dashboard Tabs
-
-**Overview** — High-level metrics across all simulations. Shows the phishing/safe distribution, department risk ranked by exposure, and a side-by-side view of click rates versus report rates by department.
-
-**Trends** — Weekly phishing rate plotted over time, and a month-by-month summary table. This is where you see whether the organisation is improving.
-
-**Employees** — Full log of every simulated interaction, including employee name, department, whether they clicked, whether they reported, and a risk classification (High / Medium / Low).
-
-**Simulate** — Configure and run a new phishing campaign. Choose the target department, number of employees, date, and the expected behavioural rates. On launch, the results are appended to the data store and all metrics refresh automatically.
-
-**AI Detector** — Paste the body of any email. The model returns a classification, a confidence percentage, and the specific phrases that contributed to the result.
-
----
-
-## Risk Score
-
-The platform computes a composite risk score per simulation using the following formula:
-
-```
-Risk = (phishing_rate x 0.4) + (click_rate x 0.4) - (report_rate x 0.2)
-```
-
-A score above 60% is classified as high risk. Between 30% and 60% is moderate. Below 30% indicates the organisation is responding well. Reporting behaviour is treated as a mitigating factor — departments that actively flag suspicious emails will see a lower score even at the same phishing exposure level.
-
----
-
-## POPIA Relevance
-
-Under the Protection of Personal Information Act, organisations are required to take reasonable steps to prevent the compromise of personal information. Phishing is the most common initial vector for data breaches. This platform supports compliance by giving security teams measurable evidence of employee awareness levels, identifying high-risk departments before an incident occurs, and tracking improvement over time.
-
----
-
-## Utility Scripts
-
-```bash
-# Run full test suite (imports, auth, AI classifier, CSV integrity)
-chmod +x test.sh && ./test.sh
-
-# Reset all simulation data before a demo
-chmod +x reset.sh && ./reset.sh
-```
-
----
-
-## Planned Improvements
-
-- Expand the AI classifier training corpus for improved accuracy on South African phishing patterns
-- Add PDF report export for management presentations
-- Build an email dispatch engine to send real simulated phishing emails
-- Support cloud deployment on Streamlit Cloud or Azure App Service
-
----
-
-## Author
-
-Scott Ngcampalala  
-South Africa, 2026
+| [StandardBank-Risk-Assessment](https://github.com/Scottie222/StandardBank-Risk-Assessment) | Risk Assessment | Experian SA 2020 — 24M records. [Live demo](https://scottie222.github.io/StandardBank-Risk-Assessment/) |
+| [CloudSec-Assessment-SA](https://github.com/Scottie222/CloudSec-Assessment-SA) | Cloud Security | Dis-Chem 2022, Experian SA 2020 |
+| [GRC-Controls-Lab](https://github.com/Scottie222/GRC-Controls-Lab) | Controls Lab | Capital One 2019 |
+| [VendorRisk-SA](https://github.com/Scottie222/VendorRisk-SA) | Third-Party Risk | Experian, Dis-Chem, MTN, TransUnion |
+| [LifeHealthcare-BCP](https://github.com/Scottie222/LifeHealthcare-BCP) | BCP/DR | Life Healthcare ransomware 2020 |
+| [MTN-ISMS-Audit](https://github.com/Scottie222/MTN-ISMS-Audit) | Internal Audit | MTN SA breach April 2025 |
+| [POPIA-GDPR-Compliance-Tracker](https://github.com/Scottie222/POPIA-GDPR-Compliance-Tracker) | Data Privacy | WhatsApp 2024 enforcement |
