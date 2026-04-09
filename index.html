@@ -250,24 +250,59 @@
 </header>
 
 <div class="hero">
-  <div class="hero-tag">PHISHING SIMULATION FRAMEWORK</div>
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:8px;">
+    <div class="hero-tag" style="margin-bottom:0;">PHISHING SIMULATION FRAMEWORK</div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <div id="liveDate" style="font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px;"></div>
+      <div id="currentQuarter" style="font-family:var(--mono);font-size:11px;color:var(--accent);border:1px solid var(--accent);padding:3px 10px;letter-spacing:1px;"></div>
+      <button onclick="toggleEdit()" id="editBtn" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:1px;padding:4px 12px;cursor:pointer;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">✎ EDIT</button>
+    </div>
+  </div>
   <h1>Security Awareness<br><em>& Threat Intelligence</em></h1>
   <p>3-campaign phishing simulation programme tracking click rates, reporting behaviour and training completion across 8 departments. Grounded in real South African phishing statistics — R200M lost to phishing in SA in 2023.</p>
+
+  <!-- Edit panel - hidden by default -->
+  <div id="editPanel" style="display:none;background:rgba(245,158,11,.05);border:1px solid rgba(245,158,11,.3);padding:20px;margin-top:20px;margin-bottom:8px;">
+    <div style="font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:2px;margin-bottom:16px;">EDIT PROGRAMME METRICS</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+      <div>
+        <label style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;display:block;margin-bottom:6px;">CAMPAIGNS RUN</label>
+        <input id="edit-campaigns" type="number" value="3" style="width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:20px;padding:8px;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div>
+        <label style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;display:block;margin-bottom:6px;">BASELINE CLICK RATE (%)</label>
+        <input id="edit-baseline" type="number" step="0.1" value="35.8" style="width:100%;background:var(--panel);border:1px solid var(--border);color:var(--red);font-family:var(--mono);font-size:20px;padding:8px;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div>
+        <label style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;display:block;margin-bottom:6px;">LATEST CLICK RATE (%)</label>
+        <input id="edit-latest" type="number" step="0.1" value="16.6" style="width:100%;background:var(--panel);border:1px solid var(--border);color:var(--green);font-family:var(--mono);font-size:20px;padding:8px;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+      <div>
+        <label style="font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:1px;display:block;margin-bottom:6px;">LATEST QUARTER LABEL</label>
+        <input id="edit-quarter-label" type="text" value="Q3 2024" style="width:100%;background:var(--panel);border:1px solid var(--border);color:var(--text);font-family:var(--mono);font-size:16px;padding:8px;outline:none;" onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border)'">
+      </div>
+    </div>
+    <div style="margin-top:16px;display:flex;gap:12px;">
+      <button onclick="applyEdit()" style="background:var(--accent);color:#000;border:none;font-family:var(--mono);font-size:12px;letter-spacing:2px;padding:10px 24px;cursor:pointer;font-weight:700;">APPLY CHANGES</button>
+      <button onclick="toggleEdit()" style="background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:12px;letter-spacing:1px;padding:10px 20px;cursor:pointer;">CANCEL</button>
+    </div>
+  </div>
+
   <div class="hero-stats">
     <div class="hero-stat">
-      <div class="val">3</div>
+      <div class="val" id="stat-campaigns">3</div>
       <div class="lbl">CAMPAIGNS RUN</div>
     </div>
     <div class="hero-stat">
-      <div class="val" style="color:var(--red)">35.8%</div>
+      <div class="val" id="stat-baseline" style="color:var(--red)">35.8%</div>
       <div class="lbl">Q1 BASELINE CLICK RATE</div>
     </div>
     <div class="hero-stat">
-      <div class="val" style="color:var(--green)">16.6%</div>
-      <div class="lbl">Q3 CLICK RATE (AFTER TRAINING)</div>
+      <div class="val" id="stat-latest" style="color:var(--green)">16.6%</div>
+      <div class="lbl" id="stat-latest-lbl">Q3 CLICK RATE (AFTER TRAINING)</div>
     </div>
     <div class="hero-stat">
-      <div class="val">19.2%</div>
+      <div class="val" id="stat-improvement">19.2%</div>
       <div class="lbl">IMPROVEMENT IN 3 QUARTERS</div>
     </div>
   </div>
@@ -643,6 +678,54 @@ URGENT: Your SARS tax refund of R4,872 is ready. Click here to verify your banki
 </footer>
 
 <script>
+  // ── Live date & current quarter ─────────────────────────────────────────
+  (function() {
+    const now    = new Date();
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    const days   = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    document.getElementById('liveDate').textContent =
+      'UPDATED ' + days[now.getDay()] + ' ' + now.getDate() + ' ' +
+      months[now.getMonth()] + ' ' + now.getFullYear();
+    const q = Math.ceil((now.getMonth() + 1) / 3);
+    document.getElementById('currentQuarter').textContent =
+      'CURRENT: Q' + q + ' ' + now.getFullYear();
+  })();
+
+  // ── Edit mode ────────────────────────────────────────────────────────────
+  function toggleEdit() {
+    const panel = document.getElementById('editPanel');
+    const btn   = document.getElementById('editBtn');
+    const open  = panel.style.display === 'none';
+    panel.style.display  = open ? 'block' : 'none';
+    btn.textContent      = open ? '✕ CLOSE' : '✎ EDIT';
+  }
+
+  function applyEdit() {
+    const campaigns = document.getElementById('edit-campaigns').value;
+    const baseline  = parseFloat(document.getElementById('edit-baseline').value);
+    const latest    = parseFloat(document.getElementById('edit-latest').value);
+    const qLabel    = document.getElementById('edit-quarter-label').value;
+    const improve   = Math.abs(baseline - latest).toFixed(1);
+
+    document.getElementById('stat-campaigns').textContent   = campaigns;
+    document.getElementById('stat-baseline').textContent    = baseline + '%';
+    document.getElementById('stat-latest').textContent      = latest + '%';
+    document.getElementById('stat-improvement').textContent = improve + '%';
+    document.getElementById('stat-latest-lbl').textContent  = qLabel + ' CLICK RATE (AFTER TRAINING)';
+
+    // Flash confirmation
+    const btn = document.getElementById('editBtn');
+    btn.textContent = '✓ SAVED';
+    btn.style.color = 'var(--green)';
+    btn.style.borderColor = 'var(--green)';
+    setTimeout(() => {
+      btn.textContent = '✎ EDIT';
+      btn.style.color = 'var(--muted)';
+      btn.style.borderColor = 'var(--border)';
+      document.getElementById('editPanel').style.display = 'none';
+    }, 1500);
+  }
+
   function showTab(id, btn) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
