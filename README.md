@@ -1,132 +1,109 @@
-# RetailCo Security Awareness & Phishing Simulation
+# RetailCo SA - Security Awareness & Phishing Simulation
+## ISO 27001:2022 A.6.3 | POPIA | Based on Real SA Phishing Statistics
 
-**Bakithi Scott Ngcampalala** Cybersecurity & GRC Professional
-[github.com/Scottie222](https://github.com/Scottie222) · [LinkedIn](https://www.linkedin.com/in/bakithi-scott-ngcampalala-0051a4105)
+![Python](https://img.shields.io/badge/Python-3.8+-blue)
+![ISO 27001](https://img.shields.io/badge/ISO-27001:2022-teal)
+![POPIA](https://img.shields.io/badge/Regulation-POPIA-green)
+![Status](https://img.shields.io/badge/Status-Live-brightgreen)
+
+## 🟢 Live Dashboard
+
+**[scottie222.github.io/RetailCo-Security-Awareness](https://scottie222.github.io/RetailCo-Security-Awareness/)**
+
+No install. No login. Click the link and the full dashboard loads instantly in your browser - including the AI phishing email detector.
 
 ---
 
-## What this project is
+## What This Project Is
 
-A full-stack Python security awareness and phishing simulation platform built for South African retail organisations, grounded in the real R200 million phishing losses reported across South African businesses in 2023. The platform simulates phishing campaigns across 6 departments, tracks employee click rates and reporting behaviour, scores departmental risk, and includes an AI-powered email threat detector all wrapped in a live interactive Streamlit dashboard.
-
-This is not a static report. It is a running application with login, role-based access, live simulation, and real-time risk scoring.
+A full security awareness and phishing simulation framework built for South African
+retail organisations, grounded in real SA phishing statistics. Tracks 3 phishing
+campaigns across 8 departments, measures click rates, reporting behaviour and training
+completion over time, and includes a live AI-powered phishing email detector — all
+running in the browser with no server required.
 
 ---
 
-## The real incident
+## Why It Matters in South Africa
 
-In 2023, South African businesses lost over **R200 million** to phishing attacks, making it the most costly social engineering threat vector in the country. The Finance and Logistics sectors were disproportionately targeted the same departments this simulation tracks as highest risk.
-
-The Transnet cyberattack of 2021 which crippled South African port operations for weeks began with a phishing email. This platform is modelled on that scenario, simulating how a single employee click in Logistics can cascade into a full ransomware incident.
-
-### Why phishing matters under POPIA
-
-| Risk | POPIA implication |
+| Statistic | Source |
 |---|---|
-| Employee clicks phishing link | Potential unauthorised access to personal information |
-| Credentials submitted | Account compromise Section 19 safeguard failure |
-| Data exfiltrated | Mandatory breach notification under Section 22 |
-| Failure to report | POPIA compliance violation — Section 55 duty |
+| **95% of SA data breaches** are caused by human error - phishing, weak passwords, social engineering | corbado.com 2024 |
+| **R200 million** lost to phishing attacks in SA in 2023 - a 50% increase from 2022 | Huge Connect / ThreatMark |
+| **PRASA lost R30.6 million** in a single phishing and social engineering scam | ThreatMark 2024 |
+| **R53.1 million** average cost of a SA data breach in 2024 | IBM 2024 |
 
 ---
 
-## Live dashboard features
+## Dashboard Features
 
-- Secure login with role-based access (Admin and Analyst roles)
-- Overview tab: total emails, phishing detected, employees clicked, reported, risk score
-- Trends tab: click rate trends over 3 campaigns
-- Employees tab: per-employee risk scoring and behaviour
-- Simulate tab: run new phishing campaigns across departments
-- AI Detector tab: paste any email and get instant threat classification
-
----
-
-## Dashboard screenshots
-
-To view the live dashboard run the app locally (instructions below). Login with:
-
-| Role | Username | Password |
-|---|---|---|
-| Admin | admin | alice/password123|
-| Analyst | alice | analyst123 |
-
----
-
-## Key results from 3 simulated campaigns
-
-| Department | Click rate | Risk level |
-|---|---|---|
-| Marketing | 100% | Critical |
-| Logistics | 94% | Critical |
-| Finance | 88% | Critical |
-| HR | 76% | High |
-| Operations | 71% | High |
-| IT | 52% | Medium |
-
-Overall risk score reduced from 72% (Campaign 1) to 59% (Campaign 3) reflecting the impact of awareness training between campaigns.
-
----
-
-## Framework alignment
-
-| Framework | Coverage |
+| Tab | What It Shows |
 |---|---|
-| ISO 27001:2022 | A.6.3 Security awareness, A.6.1 Screening, A.5.25 Incident assessment |
-| POPIA Act 4 of 2013 | Section 19 safeguards, Section 22 breach notification, Section 55 Information Officer duties |
-| NIST CSF 2.0 | Protect (PR.AT — Awareness and training), Respond (RS.CO — Communications) |
+| **Overview** | Programme summary - click rate trend, report rate trend, SA context statistics |
+| **Campaigns** | All 3 campaign results - SARS lure, FNB alert, CEO fraud/BEC |
+| **Departments** | Click rate by department - Q1 baseline vs Q3 after training |
+| **AI Detector** | Paste any email - instant phishing analysis with 40+ SA-specific indicators |
+| **POPIA** | POPIA Section 19, 20, 22, 55 compliance mapping + ISO 27001 A.6.3 alignment |
 
 ---
 
-## How to run
+## Programme Results
 
-```bash
-git clone https://github.com/Scottie222/RetailCo-Security-Awareness.git
-cd RetailCo-Security-Awareness
-python -m venv venv
-venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-python data\create_users.py
-python -m streamlit run app\app.py
-```
-
-The dashboard opens at `http://localhost:8501`
+| Metric | Q1 2024 Baseline | Q3 2024 After Training | Change |
+|---|---|---|---|
+| Average Click Rate | 35.8% | 16.6% | **↓ 19.2% improvement** |
+| Average Report Rate | 20.9% | 50.4% | **↑ 29.5% improvement** |
+| Training Completion | 57.4% | 91.4% | **↑ 34% improvement** |
+| vs SA Industry Benchmark | Above (25%) | Below (25%) | **Now below benchmark** |
 
 ---
 
-## Project structure
-RetailCo-Security-Awareness/
-├── app/
-│   ├── app.py              # Main Streamlit dashboard
-│   ├── auth.py             # Login and role-based access
-│   └── ai_detector.py      # AI phishing email classifier
-├── data/
-│   ├── create_users.py     # Generates users.csv with real bcrypt hashes
-│   ├── users.csv           # User credentials
-│   └── phishing_results.csv
-├── reports/
-├── assets/
-├── requirements.txt
-└── README.md
+## AI Phishing Email Detector
+
+Paste any suspicious email and get instant analysis across 40+ indicators:
+
+- **SA-specific lures** - SARS tax refund, FNB/Standard Bank alerts, SASSA grants, Eskom
+- **Urgency signals** - 24/48 hour deadlines, account suspension threats, final warnings
+- **Credential harvesting** - verify banking details, OTP requests, login prompts
+- **Suspicious links** - HTTP (not HTTPS), fake .za domains, URL shorteners
+- **BEC patterns** - CEO/CFO impersonation, wire transfer requests, secrecy instructions
 
 ---
 
-## References
+## Phishing Campaign Templates - SA-Specific Attack Vectors
 
-1. SABRIC phishing statistics 2023 https://www.sabric.co.za
-2. Transnet cyberattack https://www.itweb.co.za/content/KA3WBqdvgXqbRXm8
-3. POPIA Act 4 of 2013 https://www.justice.gov.za/inforeg/docs/InfoRegSA-POPIA-act4of2013.pdf
-4. ISO/IEC 27001:2022 A.6.3 https://www.iso.org/standard/82875.html
+| Campaign | Quarter | Template | SA Context |
+|---|---|---|---|
+| C-001 | Q1 2024 | Fake SARS Tax Refund | SARS impersonation - most common SA phishing vector |
+| C-002 | Q2 2024 | Fake FNB Security Alert | FNB/Standard Bank impersonation - top SA banking vector |
+| C-003 | Q3 2024 | CEO Fraud / BEC Attack | Business Email Compromise - PRASA lost R30.6M in one attack |
 
 ---
 
-## Related GRC portfolio projects
+## ISO 27001:2022 & POPIA Alignment
 
-| Project | Domain | Real incident |
+| Control | Requirement | Implementation |
 |---|---|---|
-| [StandardBank-Risk-Assessment](https://github.com/Scottie222/StandardBank-Risk-Assessment) | Risk Assessment | Experian SA 2020 — 24M records. [Live demo](https://scottie222.github.io/StandardBank-Risk-Assessment/) |
-| [CloudSec-Assessment-SA](https://github.com/Scottie222/CloudSec-Assessment-SA) | Cloud Security | Dis-Chem 2022, Experian SA 2020 |
-| [GRC-Controls-Lab](https://github.com/Scottie222/GRC-Controls-Lab) | Controls Lab | Capital One 2019 |
-| [VendorRisk-SA](https://github.com/Scottie222/VendorRisk-SA) | Third-Party Risk | Experian, Dis-Chem, MTN, TransUnion |
-| [LifeHealthcare-BCP](https://github.com/Scottie222/LifeHealthcare-BCP) | BCP/DR | Life Healthcare ransomware 2020 |
-| [MTN-ISMS-Audit](https://github.com/Scottie222/MTN-ISMS-Audit) | Internal Audit | MTN SA breach April 2025 |
-| [POPIA-GDPR-Compliance-Tracker](https://github.com/Scottie222/POPIA-GDPR-Compliance-Tracker) | Data Privacy | WhatsApp 2024 enforcement |
+| **A.6.3** | Security awareness training | 3 phishing campaigns + 6 training modules |
+| **A.6.8** | Incident reporting awareness | Report rate tracked per department per quarter |
+| **POPIA S.19** | Security safeguards | Awareness training as organisational measure |
+| **POPIA S.22** | Breach notification | Report rate tracks notification behaviour |
+| **POPIA S.55** | Information Officer duties | Documented, measured programme as evidence |
+
+---
+
+## Related GRC Portfolio Projects
+
+| Project | Description |
+|---|---|
+| [StandardBank-Risk-Assessment](https://github.com/Scottie222/StandardBank-Risk-Assessment) | ISO 27001 Risk Assessment, Live dashboard |
+| [CloudSec-Assessment-SA](https://github.com/Scottie222/CloudSec-Assessment-SA) | Cloud Security, CIS Benchmarks AWS & Azure |
+| [VendorRisk-SA](https://github.com/Scottie222/VendorRisk-SA) | Third-Party Vendor Risk — ISO 27001 A.5.19 |
+| [LifeHealthcare-BCP](https://github.com/Scottie222/LifeHealthcare-BCP) | BCP/DR, Life Healthcare ransomware 2020 |
+| [MTN-ISMS-Audit](https://github.com/Scottie222/MTN-ISMS-Audit) | Internal Audit, MTN SA breach April 2025 |
+| [OpenVantage-ISMS](https://github.com/Scottie222/OpenVantage-ISMS) | Full ISO 27001 ISMS Suite |
+
+---
+
+*Built by Bakithi Scott Ngcampalala | Junior Security Administrator @ Open Vantage*
+*LinkedIn: https://www.linkedin.com/in/bakithi-scott-ngcampalala-0051a4105*
